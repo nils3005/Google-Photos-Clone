@@ -1,0 +1,40 @@
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: monospace, sans-serif;
+    font-size: 2em;
+    max-width: 70ch;
+    display: inline;
+    padding-top: 0;
+    margin-top: 0;
+    max-width: 100%;
+}
+
+#nav {
+    list-style-type: none;
+    display: inline;
+    font-size: 2em;
+}
+
+#navbar {
+    padding-bottom: 100px;
+    position: sticky;
+    border-bottom: solid black 10px;
+}
+
+.navLeft {
+    float: left;
+}
+
+.navRight {
+    float: right;
+}
+
+#footer {
+    border-top: solid black 10px;
+    text-align: center;
+    padding: 100px 0px 100px 0px;
+}
+

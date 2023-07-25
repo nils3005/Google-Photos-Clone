@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="stylesheet.css">
+</head>
+<body>
+
+<div id="navbar">
+    <ul id="nav">
+        <li class="navLeft">Google Photos Clone</li>
+        <li class="navRight"><input id="fileupload" type="file" name="fileupload" /></li>
+        <li class="navRight"><button id="upload-button" onclick="uploadFile()">Hochladen</button></li>
+    </ul>
+</div>
+
+<div>
+    <h2>Deine Fotos</h2>
+</div>
+
+<div id="photos">
+    <p>
+        Hier ist Platz für deine Bilder!
+    </p>
+</div>
+
+<div id="footer">
+    <a href="https://github.com/nils3005">https://github.com/nils3005</a>
+</div>
+
+<script>
+    async function uploadFile() {
+        let formData = new FormData();
+        formData.append("data", fileupload.files[0]);
+        await fetch('http://localhost:8080', {
+            method: "POST",
+            body: formData
+        }).then(result => result.text())
+            .then(text => alert(text));
+    }
+</script>
+</body>
+</html>
