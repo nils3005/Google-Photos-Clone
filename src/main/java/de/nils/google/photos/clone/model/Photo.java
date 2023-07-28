@@ -13,35 +13,44 @@ public class Photo {
     @NotEmpty
     String fileName;
 
-    @JsonIgnore
-    private byte[] data;
-
+    @NotEmpty
     String contentType;
+
+    @NotEmpty
+    String data;
 
     public Photo(){
     }
 
     public String getFileName(){
-        return fileName;
+        return this.fileName;
     }
 
     public void setFileName(String fileName) {
         this.fileName = fileName;
     }
 
-    public byte[] getData() {
-        return data;
+    public String getData() {
+        return this.data;
     }
 
-    public void setData(byte[] data) {
+    public void setData(String data) {
         this.data = data;
     }
 
     public String getContentType() {
-        return contentType;
+        return this.contentType;
     }
 
     public void setContentType(String contentType){
         this.contentType = contentType;
+    }
+
+    public String getBase64(){
+        return data;
+    }
+
+    public Integer getId(){
+        return this.id;
     }
 }
