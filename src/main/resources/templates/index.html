@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="de" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Google Photos Clone</title>
+    <!--link-Tag zu Css fehlt-->
+</head>
+<body>
+
+<div id="navbar">
+    <ul id="nav">
+        <li class="navLeft">Google Photos Clone</li>
+        <li class="navRight"><input id="fileupload" type="file" name="fileupload" /></li>
+        <li class="navRight"><button id="upload-button" onclick="uploadFile()">Hochladen</button></li>
+    </ul>
+</div>
+
+<h2>Deine Fotos</h2>
+<div id="photos">
+    <table>
+        <tr th:each="foto : ${photo}">
+            <td th:text="foto.id"></td>
+            <td th:text="foto.fileName"></td>
+        </tr>
+    </table>
+</div>
+
+<div id="footer">
+    <a href="https://github.com/nils3005">https://github.com/nils3005</a>
+</div>
+
+<script>
+     async function uploadFile() {
+            let formData = new FormData();
+            formData.append("data", fileupload.files[0]);
+            await fetch('http://localhost:8080', {
+                method: "POST",
+                body: formData
+            }).then(result => result.text())
+                .then(text => alert(text));
+     }
+</script>
+
+<style>
+    html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: monospace, sans-serif;
+    font-size: 2em;
+    max-width: 70ch;
+    display: inline;
+    padding-top: 0;
+    margin-top: 0;
+    max-width: 100%;
+}
+
+#nav {
+    list-style-type: none;
+    display: inline;
+    font-size: 2em;
+}
+
+#navbar {
+    padding-bottom: 100px;
+    position: sticky;
+    border-bottom: solid black 10px;
+}
+
+.navLeft {
+    float: left;
+}
+
+.navRight {
+    float: right;
+}
+
+#footer {
+    border-top: solid black 10px;
+    text-align: center;
+    padding: 100px 0px 100px 0px;
+}
+</style>
+</body>
+</html>
