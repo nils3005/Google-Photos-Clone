@@ -41,12 +41,7 @@ public class PhotosController {
         return "index";
     }
 
-    @GetMapping("/upload")
-        public String getUploadPage(){
-            return "upload";
-        }
-
-    @PostMapping("/upload")
+    @PostMapping("/")
     public String upload(@RequestPart ("data") MultipartFile file) throws IOException {
         photoService.save(file);
         return "index";
