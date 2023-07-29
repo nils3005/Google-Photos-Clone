@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URISyntaxException;
@@ -40,7 +41,12 @@ public class PhotosController {
         return "index";
     }
 
-    @PostMapping("/")
+    @GetMapping("/upload")
+        public String getUploadPage(){
+            return "upload";
+        }
+
+    @PostMapping("/upload")
     public String upload(@RequestPart ("data") MultipartFile file) throws IOException {
         photoService.save(file);
         return "index";

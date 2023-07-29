@@ -4,6 +4,15 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.validation.constraints.NotEmpty;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Table;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.attribute.BasicFileAttributes;
+import java.nio.file.attribute.FileTime;
+import java.util.Objects;
 
 @Table("PHOTOS")
 public class Photo {
@@ -18,6 +27,7 @@ public class Photo {
 
     @NotEmpty
     String data;
+
 
     public Photo(){
     }
