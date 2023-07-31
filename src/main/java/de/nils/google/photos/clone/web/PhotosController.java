@@ -44,8 +44,7 @@ public class PhotosController {
     @PostMapping("/")
     public String upload(@RequestPart ("data") MultipartFile file) throws IOException {
         photoService.save(file);
-        String url = "redirect:/index";
-        return url;
+        return "index";
     }
 
     @DeleteMapping("/")
