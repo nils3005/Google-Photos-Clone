@@ -20,7 +20,7 @@
                     </div>
                     <div class="custom-file">
                         <input type="file" class="custom-file-input" id="fileupload" name="fileupload" aria-describedby="inputGroupFileAddon01">
-                        <label class="custom-file-label" for="fileupload">Datei auswählen</label>
+                        <label class="custom-file-label w-50" for="fileupload">Datei auswählen</label>
                     </div>
                 </div>
             </div>
@@ -32,7 +32,7 @@
             </div>
         </div>
 
-        <div class="row mt-5 pt-3 mb-5 pb-5">
+        <div class="row mt-5 pt-3 mb-5 pb-5" id="photo-row">
             <div class="col-sm-6" th:each="foto : ${photos}">
                 <div class="form-check mt-4 mb-4 d-flex justify-content-center shadow p-3 bg-white rounded">
                     <img th:src="@{'data:image/png;base64,'+${foto.getBase64()}}" class="photo img-fluid" alt="Foto" loading="lazy">
@@ -40,7 +40,6 @@
             </div>
         </div>
 
-        <!-- Modal -->
         <div class="modal fade" id="photo-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
                 <div class="modal-content">
@@ -53,7 +52,6 @@
                         <img class="modal-img img-fluid" src="" alt="Photo Modal">
                     </div>
                     <div class="modal-footer">
-                        <!--Möglichkeit Bilder zu löschen-->
                         <button type="button" onclick="deleteFile()" class="btn" data-dismiss="modal"><span class="bi bi-trash"></span></button>
                     </div>
                 </div>
@@ -61,14 +59,65 @@
         </div>
 
         <div class="row mt-5 pb-2 pt-2 bg-secondary text-center text-light shadow-lg rounded fixed-bottom">
-            <div class="col">
+            <div class="col d-flex justify-content-start pl-4 info-center">
+                <button class="btn bi bi-info-circle" data-toggle="modal" data-target="#infoModal"></button>
+            </div>
+            <div class="col d-flex justify-content-end align-items-center pr-4">
                 <span class="h6">Made by <a class="text-light" href="https://github.com/nils3005">nils3005</a></span>
+            </div>
+        </div>
+
+        <div class="modal fade" id="infoModal" tabindex="-1" role="dialog" aria-labelledby="infoModalTitle" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <h5>Willkommen im Informationszentrum</h5>
+                        <p>
+                            Das "Meine Fotogalerie"-Programm ermöglicht es Ihnen Bilder lokal in einer Datenbank zu sichern.
+                        </p>
+                        <p>
+                            Zusätzlich werden Ihre Fotos in einer modernen Übersicht dargestellt.
+                        </p>
+                        <p>
+                            Mit einem einfachen Mausklick, auf ein von Ihnen hochgeladenes Bild, können Sie diese als Popup-Ansicht darstellen.
+                        </p>
+                        <hr>
+                        <h5>Bedienung</h5>
+                        <p>
+                            Laden Sie ganz bequem ein oder mehrere Fotos Ihrer Wahl über den Upload-Button oben rechts auf der Hauptseite hoch.
+                        </p>
+                        <p>
+                            Fotos können Sie in der Popup-Ansicht genauso einfach löschen, wie Sie diese hinzugefügt haben.
+                        </p>
+                        <p>
+                            Aktuell arbeiten wir an einem Papierkorb-Feature. Sobald dieser zur Verfügung steht werden Sie mehr erfahren.
+                        </p>
+                        <hr>
+                        <h5>Ansprechpartner</h5>
+                        <p>
+                            Bei weiteren Fragen oder Bemerkungen, melden Sie sich bitte beim <a href="https://github.com/nils3005">Entwicklerteam</a>.
+                            Dort lässt sich ebenfalls der Quellcode finden.
+                        </p>
+                        <p>
+                            <em>Vielen Dank, dass Sie sich für uns entschieden haben!</em>
+                        </p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
 </body>
     <script>
+        function reloadPhotos(){
+            location.reload();
+        }
+
         async function uploadFile() {
             let formData = new FormData();
             formData.append("data", fileupload.files[0]);
@@ -76,11 +125,11 @@
                method: "POST",
                body: formData
             })
-            location.reload();
+            reloadPhotos();
         }
 
         async function deleteFile() {
-            location.reload();
+            reloadPhotos();
         }
 
         document.addEventListener("click", function (e){
@@ -88,6 +137,10 @@
                 const src = e.target.getAttribute("src");
                 document.querySelector(".modal-img").src = src;
                 const myModal = new bootstrap.Modal(document.getElementById('photo-modal'))
+                myModal.show();
+            }
+            if(e.target.classList.contains("info-center")){
+                const myModal = new bootstrap.Modal(document.getElementById('info-modal'))
                 myModal.show();
             }
         })
