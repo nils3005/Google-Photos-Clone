@@ -31,31 +31,15 @@
             </div>
         </div>
 
-        <div class="row mt-5 pt-5">
-            <div class="col w-25 p-3">
-                <table>
-                    <tr th:each="foto : ${photos}">
-                        <td><img alt="Foto" th:src="@{'data:image/png;base64,'+${foto.getBase64()}}" class="img-fluid"></td>
-                    </tr>
-                </table>
-            </div>
-            <div class="col w-25 p-3">
-                <table>
-                    <tr th:each="foto : ${photos}">
-                        <td><img alt="Foto" th:src="@{'data:image/png;base64,'+${foto.getBase64()}}" class="img-fluid"></td>
-                    </tr>
-                </table>
-            </div>
-            <div class="col w-25 p-3">
-                <table>
-                    <tr th:each="foto : ${photos}">
-                        <td><img alt="Foto" th:src="@{'data:image/png;base64,'+${foto.getBase64()}}" class="img-fluid"></td>
-                    </tr>
-                </table>
+        <div class="row mt-5 pt-3 mb-5 pb-5">
+            <div class="col-sm-6" th:each="foto : ${photos}">
+                <div class="form-check mt-4 mb-4 d-flex justify-content-center shadow p-3 bg-white rounded">
+                    <img th:src="@{'data:image/png;base64,'+${foto.getBase64()}}" class="img-fluid" alt="Foto">
+                </div>
             </div>
         </div>
 
-        <div class="row mt-5 pb-5 pt-5 bg-secondary text-center text-light shadow-lg rounded fixed-bottom">
+        <div class="row mt-5 pb-2 pt-2 bg-secondary text-center text-light shadow-lg rounded fixed-bottom">
             <div class="col">
                 <span class="h6">Made by <a class="text-light" href="https://github.com/nils3005">nils3005</a></span>
             </div>
@@ -71,6 +55,7 @@
                    method: "POST",
                    body: formData
            })
+        location.reload();
         }
     </script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
