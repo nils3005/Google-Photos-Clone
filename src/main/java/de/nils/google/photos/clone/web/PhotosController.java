@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.view.RedirectView;
 
 import java.io.File;
 import java.io.IOException;
@@ -22,10 +23,10 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.List;
 
 @Controller
 public class PhotosController {
-    @Autowired
     private final PhotoService photoService;
 
     public PhotosController(PhotoService photoService) {
@@ -43,9 +44,19 @@ public class PhotosController {
 
     @PostMapping("/")
     public String upload(@RequestPart ("data") MultipartFile file) throws IOException {
-        if(file.getContentType().contains("image/")) {
+        /*
+        for (int i = 0; i < files.size(); i++) {
+            if(files.get(i).getContentType().contains("image/") && !files.get(i).isEmpty()) {
+                photoService.save(files.get(i));
+            }
+        }
+
+         */
+
+        if (file.getContentType().contains("image/") && !file.isEmpty()){
             photoService.save(file);
         }
+
         return "index";
     }
 

@@ -18,15 +18,15 @@ public class PhotoService {
         this.photoRepository = photoRepository;
     }
 
-    public Iterable<Photo> getPhotos(){
+    public Iterable<Photo> getPhotos() {
         return photoRepository.findAll();
     }
 
-    public Photo getPhotoByID(Integer id){
+    public Photo getPhotoByID(Integer id) {
         return photoRepository.findById(id).orElse(null);
     }
 
-    public void removeByID(Integer id){
+    public void removeByID(Integer id) {
         photoRepository.deleteById(id);
     }
 

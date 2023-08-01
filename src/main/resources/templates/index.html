@@ -19,8 +19,8 @@
                         <button onclick="uploadFile();" type="button" class="btn input-group-text" id="inputGroupFileAddon01" >Hochladen</button>
                     </div>
                     <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="fileupload" name="fileupload" aria-describedby="inputGroupFileAddon01" accept="image/*">
-                        <label class="custom-file-label w-50" for="fileupload">Datei auswählen</label>
+                        <input multiple type="file" class="custom-file-input" id="fileupload" name="fileupload[]" onchange="showInputChange(this)" aria-describedby="inputGroupFileAddon01" accept="image/*">
+                        <label class="custom-file-label w-50" for="fileupload" id="label">Datei auswählen</label>
                     </div>
                 </div>
             </div>
@@ -104,12 +104,19 @@
 
         async function uploadFile() {
             let formData = new FormData();
-            formData.append("data", fileupload.files[0]);
-            await fetch('http://localhost:8080', {
-               method: "POST",
-               body: formData
-            })
+            for(let i = 0; i < fileupload.files.length; i++){
+                formData.append("data", fileupload.files[i]);
+                await fetch('http://localhost:8080', {
+                    method: "POST",
+                    body: formData
+                })
+            }
             reloadPhotos();
+        }
+
+        function showInputChange(input) {
+            const size = input.files.length;
+            document.getElementById("label").innerHTML  = size + " Element(e)";
         }
 
         async function deleteFile() {
