@@ -43,7 +43,9 @@ public class PhotosController {
 
     @PostMapping("/")
     public String upload(@RequestPart ("data") MultipartFile file) throws IOException {
-        photoService.save(file);
+        if(file.getContentType().contains("image/")) {
+            photoService.save(file);
+        }
         return "index";
     }
 

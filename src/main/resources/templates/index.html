@@ -16,10 +16,10 @@
             <div class="col">
                 <div class="input-group">
                     <div class="input-group-prepend">
-                        <button onclick="uploadFile();" type="button" class="btn input-group-text" id="inputGroupFileAddon01">Hochladen</button>
+                        <button onclick="uploadFile();" type="button" class="btn input-group-text" id="inputGroupFileAddon01" >Hochladen</button>
                     </div>
                     <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="fileupload" name="fileupload" aria-describedby="inputGroupFileAddon01">
+                        <input type="file" class="custom-file-input" id="fileupload" name="fileupload" aria-describedby="inputGroupFileAddon01" accept="image/*">
                         <label class="custom-file-label w-50" for="fileupload">Datei auswählen</label>
                     </div>
                 </div>
@@ -77,35 +77,19 @@
                     </div>
                     <div class="modal-body">
                         <h5>Willkommen im Informationszentrum</h5>
-                        <p>
-                            Das "Meine Fotogalerie"-Programm ermöglicht es Ihnen Bilder lokal in einer Datenbank zu sichern.
-                        </p>
-                        <p>
-                            Zusätzlich werden Ihre Fotos in einer modernen Übersicht dargestellt.
-                        </p>
-                        <p>
-                            Mit einem einfachen Mausklick, auf ein von Ihnen hochgeladenes Bild, können Sie diese als Popup-Ansicht darstellen.
-                        </p>
+                        <p>Das "Meine Fotogalerie"-Programm ermöglicht es Ihnen Bilder lokal in einer Datenbank zu sichern.</p>
+                        <p>Zusätzlich werden Ihre Fotos in einer modernen Übersicht dargestellt.</p>
+                        <p>Mit einem einfachen Mausklick, auf ein von Ihnen hochgeladenes Bild, können Sie diese als Popup-Ansicht darstellen.</p>
                         <hr>
                         <h5>Bedienung</h5>
-                        <p>
-                            Laden Sie ganz bequem ein oder mehrere Fotos Ihrer Wahl über den Upload-Button oben rechts auf der Hauptseite hoch.
-                        </p>
-                        <p>
-                            Fotos können Sie in der Popup-Ansicht genauso einfach löschen, wie Sie diese hinzugefügt haben.
-                        </p>
-                        <p>
-                            Aktuell arbeiten wir an einem Papierkorb-Feature. Sobald dieser zur Verfügung steht werden Sie mehr erfahren.
-                        </p>
+                        <p>Laden Sie ganz bequem ein oder mehrere Fotos Ihrer Wahl über den Upload-Button oben rechts auf der Hauptseite hoch.</p>
+                        <p>Fotos können Sie in der Popup-Ansicht genauso einfach löschen, wie Sie diese hinzugefügt haben.</p>
+                        <p>Aktuell arbeiten wir an einem Papierkorb-Feature. Sobald dieser zur Verfügung steht werden Sie mehr erfahren.</p>
+                        <p>Warnung: Momentan sind nur Fotos erlaubt.</p>
                         <hr>
                         <h5>Ansprechpartner</h5>
-                        <p>
-                            Bei weiteren Fragen oder Bemerkungen, melden Sie sich bitte beim <a href="https://github.com/nils3005">Entwicklerteam</a>.
-                            Dort lässt sich ebenfalls der Quellcode finden.
-                        </p>
-                        <p>
-                            <em>Vielen Dank, dass Sie sich für uns entschieden haben!</em>
-                        </p>
+                        <p>Bei weiteren Fragen oder Bemerkungen, melden Sie sich bitte beim <a href="https://github.com/nils3005">Entwicklerteam</a>. Dort lässt sich ebenfalls der Quellcode finden.</p>
+                        <p><em>Vielen Dank, dass Sie sich für uns entschieden haben!</em></p>
                     </div>
                 </div>
             </div>
@@ -137,10 +121,6 @@
                 const src = e.target.getAttribute("src");
                 document.querySelector(".modal-img").src = src;
                 const myModal = new bootstrap.Modal(document.getElementById('photo-modal'))
-                myModal.show();
-            }
-            if(e.target.classList.contains("info-center")){
-                const myModal = new bootstrap.Modal(document.getElementById('info-modal'))
                 myModal.show();
             }
         })
