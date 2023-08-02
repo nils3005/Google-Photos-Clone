@@ -97,41 +97,7 @@
     </div>
 
 </body>
-    <script>
-        function reloadPhotos(){
-            location.reload();
-        }
-
-        async function uploadFile() {
-            let formData = new FormData();
-            for(let i = 0; i < fileupload.files.length; i++){
-                formData.append("data", fileupload.files[i]);
-            }
-            await fetch('http://localhost:8080', {
-                method: "POST",
-                body: formData
-            })
-            reloadPhotos();
-        }
-
-        function showInputChange(input) {
-            const size = input.files.length;
-            document.getElementById("label").innerHTML  = size + " Element(e)";
-        }
-
-        async function deleteFile() {
-            reloadPhotos();
-        }
-
-        document.addEventListener("click", function (e){
-            if(e.target.classList.contains("photo")){
-                const src = e.target.getAttribute("src");
-                document.querySelector(".modal-img").src = src;
-                const myModal = new bootstrap.Modal(document.getElementById('photo-modal'))
-                myModal.show();
-            }
-        })
-    </script>
+    <script type="text/javascript" src="app.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
@@ -139,7 +105,7 @@
     <style>
         @media (min-width: 768px) {
           .modal-xl {
-            width: 90%;
+           width: 90%;
            max-width:1400px;
           }
         }
