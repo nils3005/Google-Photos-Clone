@@ -43,25 +43,17 @@ public class PhotosController {
     }
 
     @PostMapping("/")
-    public String upload(@RequestPart ("data") MultipartFile file) throws IOException {
-        /*
-        for (int i = 0; i < files.size(); i++) {
-            if(files.get(i).getContentType().contains("image/") && !files.get(i).isEmpty()) {
-                photoService.save(files.get(i));
+    public String upload(@RequestPart("data") MultipartFile[] file) throws IOException {
+        for (int i = 0; i < file.length; i++) {
+            if (file[i].getContentType().contains("image/") && !file[i].isEmpty()) {
+                photoService.save(file[i]);
             }
         }
-
-         */
-
-        if (file.getContentType().contains("image/") && !file.isEmpty()){
-            photoService.save(file);
-        }
-
         return "index";
     }
 
     @DeleteMapping("/")
-    public String delete(@RequestPart ("data") Photo photo){
+    public String delete(@RequestPart("data") Photo photo) {
         photoService.removeByID(photo.getId());
         return "index";
     }
