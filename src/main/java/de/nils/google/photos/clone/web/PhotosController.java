@@ -42,7 +42,7 @@ public class PhotosController {
         return "index";
     }
 
-    @PostMapping("/")
+    @PostMapping("/post")
     public String upload(@RequestPart("data") MultipartFile[] files) throws IOException {
         for (int i = 0; i < files.length; i++) {
             if (files[i].getContentType().contains("image/") && !files[i].isEmpty()) {
@@ -52,11 +52,9 @@ public class PhotosController {
         return "index";
     }
 
-    @DeleteMapping("/")
-    public String delete(@RequestPart("data") Photo[] photos) {
-        for (int i = 0; i < photos.length; i++) {
-            photoService.removeByID(photos[i].getId());
-        }
+    @DeleteMapping("/delete/{id}")
+    public String delete(@PathVariable Integer id) {
+        photoService.removeByID(id);
         return "index";
     }
 }
