@@ -1,6 +1,5 @@
 package de.nils.google.photos.clone.service;
 
-import com.fasterxml.jackson.databind.ser.Serializers;
 import de.nils.google.photos.clone.model.Photo;
 import de.nils.google.photos.clone.repository.PhotoRepository;
 import org.springframework.stereotype.Service;
@@ -8,7 +7,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.Base64;
-import java.util.BitSet;
 
 @Service
 public class PhotoService {
@@ -34,8 +32,7 @@ public class PhotoService {
         Photo photo = new Photo();
         photo.setFileName(file.getOriginalFilename());
         photo.setContentType(file.getContentType());
-        String base64 = Base64.getEncoder().encodeToString(file.getBytes());
-        photo.setData(base64);
+        photo.setBase64(Base64.getEncoder().encodeToString(file.getBytes()));
         photoRepository.save(photo);
         return photo;
     }

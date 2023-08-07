@@ -5,98 +5,7 @@
     <title>Fotogalerie</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
-</head>
-<body>
-    <div class="container">
-        <div class="row fixed-top pt-2 pb-2 mb-5 shadow p-3 bg-white rounded">
-            <div class="col">
-                <span class="h1">Meine Fotogalerie</span>
-            </div>
-            <div class="col">
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                        <button onclick="uploadFile();" type="button" class="btn input-group-text" id="inputGroupFileAddon01" >Hochladen</button>
-                    </div>
-                    <div class="custom-file">
-                        <input multiple type="file" class="custom-file-input" id="fileupload" name="fileupload[]" onchange="showInputChange(this)" aria-describedby="inputGroupFileAddon01" accept="image/*">
-                        <label class="custom-file-label w-50" for="fileupload" id="label">Datei auswählen</label>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row mt-5 pt-5 text-center">
-            <div class="col">
-            <span th:text="${photos?.isEmpty} ? 'Hier ist der Platz für deine Fotos!' : ''" class="text-secondary"></span>
-            </div>
-        </div>
-
-        <div class="row mt-5 pt-3 mb-5 pb-5" id="photo-row">
-            <div class="col-sm-4" th:each="foto : ${photos}">
-                <div class="form-check mt-4 mb-4 d-flex justify-content-center shadow p-3 bg-white rounded">
-                    <img th:src="@{'data:image/jpeg;base64,' + ${foto.getBase64()}}" th:id="${foto.id}" class="photo img-fluid" alt="Foto" loading="lazy">
-                </div>
-            </div>
-        </div>
-
-        <div class="modal fade" id="photo-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body d-flex justify-content-center">
-                        <img class="modal-img img-fluid" src="" id="" alt="Photo Modal">
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" onclick="deletePhotoFromModal()" class="btn" data-dismiss="modal"><span class="bi bi-trash"></span></button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row mt-5 pb-2 pt-2 bg-secondary text-center text-light shadow-lg rounded fixed-bottom">
-            <div class="col d-flex justify-content-start pl-4 info-center">
-                <button class="btn bi bi-info-circle" data-toggle="modal" data-target="#infoModal"></button>
-            </div>
-            <div class="col d-flex justify-content-end align-items-center pr-4">
-                <span class="h6">Made by <a class="text-light" href="https://github.com/nils3005">nils3005</a></span>
-            </div>
-        </div>
-
-        <div class="modal fade" id="infoModal" tabindex="-1" role="dialog" aria-labelledby="infoModalTitle" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <h5>Willkommen im Informationszentrum</h5>
-                        <p>Das "Meine Fotogalerie"-Programm ermöglicht es Ihnen Bilder lokal in einer Datenbank zu sichern.</p>
-                        <p>Zusätzlich werden Ihre Fotos in einer modernen Übersicht dargestellt.</p>
-                        <p>Mit einem einfachen Mausklick, auf ein von Ihnen hochgeladenes Bild, können Sie diese als Popup-Ansicht darstellen.</p>
-                        <hr>
-                        <h5>Bedienung</h5>
-                        <p>Laden Sie ganz bequem ein oder mehrere Fotos Ihrer Wahl über den Upload-Button oben rechts auf der Hauptseite hoch.</p>
-                        <p>Fotos können Sie in der Popup-Ansicht genauso einfach löschen, wie Sie diese hinzugefügt haben.</p>
-                        <p>Aktuell arbeiten wir an einem Papierkorb-Feature. Sobald dieser zur Verfügung steht werden Sie mehr erfahren.</p>
-                        <p>Warnung: Momentan sind nur Fotos erlaubt.</p>
-                        <hr>
-                        <h5>Ansprechpartner</h5>
-                        <p>Bei weiteren Fragen oder Bemerkungen, melden Sie sich bitte beim <a href="https://github.com/nils3005">Entwicklerteam</a>. Dort lässt sich ebenfalls der Quellcode finden.</p>
-                        <p><em>Vielen Dank, dass Sie sich für uns entschieden haben!</em></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-</body>
-    <script type="text/javascript" src="app.js"></script>
+    <script type="text/javascript" src="main.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
@@ -108,4 +17,50 @@
           }
         }
     </style>
+</head>
+<body>
+<!--Navbar-->
+    <div th:replace="~{fragments/nav :: navbar}"></div>
+    <div class="container">
+            <!--Upload Form-->
+            <div class="row d-flex align-items-center justify-content-center p-2">
+                <div class="col col-sm-5 input-group">
+                    <div class="input-group-prepend">
+                        <button onclick="uploadFile();" type="button" class="btn input-group-text" id="inputGroupFileAddon01" >Hochladen</button>
+                    </div>
+                    <div class="custom-file">
+                        <input multiple type="file" class="custom-file-input" id="fileupload" name="fileupload[]" onchange="showInputChange(this)" aria-describedby="inputGroupFileAddon01" accept="image/*">
+                        <label class="custom-file-label" for="fileupload" id="label">Datei auswählen</label>
+                    </div>
+                </div>
+            </div>
+
+            <!--Fotospalten-->
+            <div th:replace="~{fragments/photos :: photos}"></div>
+
+            <!--Img Modal-->
+            <div class="modal fade" id="photo-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body d-flex justify-content-center">
+                            <img class="modal-img img-fluid" src="" id="" alt="Photo Modal">
+                        </div>
+                        <div class="modal-footer">
+                            <button onclick="downloadPhotoFromModal()" class="btn" type="button"><span class="bi bi-download"></span></button>
+                            <button type="button" onclick="deletePhotoFromModal()" class="btn " data-dismiss="modal"><span class="bi bi-trash"></span></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--Footer-->
+            <div th:replace="~{fragments/footer :: footer}"></div>
+        </div>
+
+</body>
 </html>

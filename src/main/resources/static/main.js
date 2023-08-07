@@ -10,31 +10,20 @@ async function uploadFile() {
     reload();
 }
 
-function deletePhotoFromModal() {
+async function deletePhotoFromModal() {
     const modalImg = document.getElementsByClassName("modal-img");
     const id = modalImg[0].id;
-    deletePhoto(id);
-}
-
-async function deletePhoto(id){
-    await fetch('http://localhost:8080/delete/' + id, { method: "DELETE" })
-    .then(res => {
-        if(res.ok){
-            console.log("ok");
-        }else{
-            console.log("fehler");
-        }
-    })
+    await fetch('http://localhost:8080/delete/' + id, { method: "DELETE" });
     reload();
 }
 
-function downloadPhotoFromModal(e){
-    const modalImg = document.getElementsByClassName("modal-img");
-    const id = modalImg[0].id;
-    downloadPhoto(id);
+async function deletePhoto(id){
+
 }
 
-async function downloadPhoto(id){
+async function downloadPhotoFromModal(e){
+    const modalImg = document.getElementsByClassName("modal-img");
+    const id = modalImg[0].id;
     await fetch('http://localhost:8080/download/' + id).then(res => console.log(res));
 }
 

@@ -1,18 +1,8 @@
 package de.nils.google.photos.clone.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.validation.constraints.NotEmpty;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Table;
-import org.springframework.web.multipart.MultipartFile;
-
-import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.attribute.BasicFileAttributes;
-import java.nio.file.attribute.FileTime;
-import java.util.Objects;
 
 @Table("PHOTOS")
 public class Photo {
@@ -26,8 +16,7 @@ public class Photo {
     String contentType;
 
     @NotEmpty
-    String data;
-
+    String base64;
 
     public Photo(){
     }
@@ -40,12 +29,12 @@ public class Photo {
         this.fileName = fileName;
     }
 
-    public String getData() {
-        return this.data;
+    public String getBase64() {
+        return this.base64;
     }
 
-    public void setData(String data) {
-        this.data = data;
+    public void setBase64(String base64) {
+        this.base64 = base64;
     }
 
     public String getContentType() {
@@ -56,11 +45,7 @@ public class Photo {
         this.contentType = contentType;
     }
 
-    public String getBase64(){
-        return data;
-    }
-
-    public Integer getId(){
+    public Integer id(){
         return this.id;
     }
 }
