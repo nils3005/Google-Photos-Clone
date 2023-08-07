@@ -7,7 +7,7 @@ async function uploadFile() {
         method: "POST",
         body: formData
     })
-    reloadPhotos();
+    reload();
 }
 
 function deletePhotoFromModal() {
@@ -17,8 +17,25 @@ function deletePhotoFromModal() {
 }
 
 async function deletePhoto(id){
-    await fetch('http://localhost:8080/delete/' + id, { method: "DELETE" });
-    reloadPhotos();
+    await fetch('http://localhost:8080/delete/' + id, { method: "DELETE" })
+    .then(res => {
+        if(res.ok){
+            console.log("ok");
+        }else{
+            console.log("fehler");
+        }
+    })
+    reload();
+}
+
+function downloadPhotoFromModal(e){
+    const modalImg = document.getElementsByClassName("modal-img");
+    const id = modalImg[0].id;
+    downloadPhoto(id);
+}
+
+async function downloadPhoto(id){
+    await fetch('http://localhost:8080/download/' + id).then(res => console.log(res));
 }
 
 document.addEventListener("click", function (e){
@@ -42,6 +59,6 @@ function showInputChange(input) {
     }
 }
 
-function reloadPhotos(){
+function reload(){
     location.reload();
 }
