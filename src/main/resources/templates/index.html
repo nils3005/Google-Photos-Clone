@@ -21,6 +21,7 @@
 <body>
 <!--Navbar-->
     <div th:replace="~{fragments/nav :: navbar}"></div>
+
     <div class="container">
             <!--Upload Form-->
             <div class="row d-flex align-items-center justify-content-center p-2">
@@ -32,6 +33,12 @@
                         <input multiple type="file" class="custom-file-input" id="fileupload" name="fileupload[]" onchange="showInputChange(this)" aria-describedby="inputGroupFileAddon01" accept="image/*">
                         <label class="custom-file-label" for="fileupload" id="label">Datei auswählen</label>
                     </div>
+                </div>
+
+                <div class="col">
+                    <button onclick="toggleSelect(this)" class="btn bi bi-toggle-off"></button>
+                    <button onclick="deleteSelectedPhotos(this)" id="multipleDelete" class="btn bi bi-trash disabled"></button>
+                    <button onclick="downloadSelectedPhotos(this)" id="multipleDownload" class="btn bi bi-download disabled"></button>
                 </div>
             </div>
 
@@ -57,9 +64,6 @@
                     </div>
                 </div>
             </div>
-
-            <!--Footer-->
-            <div th:replace="~{fragments/footer :: footer}"></div>
         </div>
 
 </body>

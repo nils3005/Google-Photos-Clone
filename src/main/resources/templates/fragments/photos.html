@@ -2,7 +2,7 @@
   <!--Fotos-->
   <div class="row mt-3 pt-3 mb-5 pb-5" id="photo-row">
     <div class="col-sm-4" th:each="foto : ${photos}">
-      <div class="form-check mt-4 mb-4 d-flex justify-content-center shadow p-3 bg-white rounded">
+      <div class="form-check mt-4 mb-4 d-flex justify-content-center shadow p-1 bg-white rounded">
         <img th:src="@{'data:image/jpeg;base64,' + ${foto.getBase64()}}" th:id="${foto.id}" class="photo img-fluid" alt="Foto" loading="lazy">
       </div>
     </div>

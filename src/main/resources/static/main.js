@@ -1,34 +1,41 @@
+let isSelect = true;
+let photos = [];
+
 async function uploadFile() {
     let formData = new FormData();
     for(let i = 0; i < fileupload.files.length; i++){
         formData.append("data", fileupload.files[i]);
     }
     await fetch('http://localhost:8080/post', {
-        method: "POST",
-        body: formData
-    })
+            method: "POST",
+            body: formData
+            });
     reload();
 }
 
-async function deletePhotoFromModal() {
-    const modalImg = document.getElementsByClassName("modal-img");
-    const id = modalImg[0].id;
+async function deleteFile(id){
     await fetch('http://localhost:8080/delete/' + id, { method: "DELETE" });
     reload();
 }
 
-async function deletePhoto(id){
-
+async function downloadFile(id){
+    await fetch("http://localhost:8080/download/" + id);
 }
 
-async function downloadPhotoFromModal(e){
+function deletePhotoFromModal() {
     const modalImg = document.getElementsByClassName("modal-img");
     const id = modalImg[0].id;
-    await fetch('http://localhost:8080/download/' + id).then(res => console.log(res));
+    deleteFile(id);
+}
+
+function downloadPhotoFromModal(e){
+    const modalImg = document.getElementsByClassName("modal-img");
+    const id = modalImg[0].id;
+    downloadFile(id);
 }
 
 document.addEventListener("click", function (e){
-    if(e.target.classList.contains("photo")){
+    if(isSelect && e.target.classList.contains("photo")){
         const src = e.target.getAttribute("src");
         const id = e.target.getAttribute("id");
         const element = document.querySelector(".modal-img");
@@ -37,7 +44,64 @@ document.addEventListener("click", function (e){
         const myModal = new bootstrap.Modal(document.getElementById('photo-modal'))
         myModal.show();
     }
+    if(!isSelect && e.target.classList.contains("photo")){
+        const element = e.target.parentElement;
+        if(photos.includes(e.target.id)){
+            element.classList.remove("border");
+            element.classList.remove("border-primary");
+            const index = photos.indexOf(e.target.id);
+            photos.splice(index, 1);
+        } else {
+            element.classList.add("border");
+            element.classList.add("border-primary");
+            photos.push(e.target.id);
+        }
+    }
 })
+
+function deleteSelectedPhotos(e){
+    if(!e.classList.contains("disabled")){
+        for(let i = 0; i < photos.length; i++){
+            deleteFile(photos[i]);
+        }
+        photos = [];
+    }
+}
+
+function downloadSelectedPhotos(e){
+    if(!e.classList.contains("disabled")){
+        for(let i = 0; i < photos.length; i++){
+            downloadFile(photos[i]);
+        }
+        photos = [];
+    }
+}
+
+function toggleSelect(e){
+    if(isSelect){
+        document.getElementById("multipleDelete").classList.remove("disabled");
+        document.getElementById("multipleDownload").classList.remove("disabled");
+        e.classList.remove("bi-toggle-off");
+        e.classList.add("bi-toggle-on");
+        isSelect = false;
+    }else{
+        document.getElementById("multipleDelete").classList.add("disabled");
+        document.getElementById("multipleDownload").classList.add("disabled");
+        e.classList.add("bi-toggle-off");
+        e.classList.remove("bi-toggle-on");
+
+        const elements = document.querySelectorAll("div.form-check");
+        for(let i = 0; i < elements.length; i++){
+            if(elements[i].classList.contains("border")){
+                elements[i].classList.remove("border");
+                elements[i].classList.remove("border-primary");
+                console.log(elements[i].id);
+            }
+        }
+        photos = [];
+        isSelect = true;
+    }
+}
 
 function showInputChange(input) {
     const size = input.files.length;
@@ -48,6 +112,4 @@ function showInputChange(input) {
     }
 }
 
-function reload(){
-    location.reload();
-}
+function reload(){ location.reload(); }

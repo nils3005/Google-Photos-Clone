@@ -61,21 +61,22 @@ public class PhotosController {
         return "index";
     }
 
-    @RequestMapping("/delete")
-    public String deletePage(Model model){
-        Iterable<Photo> iterable = photoService.getPhotos();
-        ArrayList<Photo> photos = new ArrayList<>();
-        iterable.forEach(photos::add);
-        model.addAttribute("photos", photos);
-        return "delete";
+    @RequestMapping(path = "/download/{id}", method = RequestMethod.GET)
+    public ResponseEntity<byte[]> download(@PathVariable("id") Integer id){
+        Photo photo = photoService.getPhotoByID(id);
+        if (photo == null) throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        byte[] data = Base64.decodeBase64(photo.getBase64());
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.valueOf(photo.getContentType()));
+        ContentDisposition build = ContentDisposition.builder("attachement")
+                .filename(photo.getFileName())
+                .build();
+        headers.setContentDisposition(build);
+        return new ResponseEntity<>(data, headers, HttpStatus.OK);
     }
 
-    @RequestMapping("/download")
-    public String downloadPage(Model model){
-        Iterable<Photo> iterable = photoService.getPhotos();
-        ArrayList<Photo> photos = new ArrayList<>();
-        iterable.forEach(photos::add);
-        model.addAttribute("photos", photos);
-        return "download";
+    @RequestMapping("/info")
+    public String infoPage(){
+        return "info";
     }
 }
