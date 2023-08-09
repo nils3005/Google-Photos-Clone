@@ -19,7 +19,7 @@ async function deleteFile(id){
 }
 
 async function downloadFile(id){
-    await fetch("http://localhost:8080/download/" + id);
+    window.location.href= ("http://localhost:8080/download/" + id);
 }
 
 function deletePhotoFromModal() {

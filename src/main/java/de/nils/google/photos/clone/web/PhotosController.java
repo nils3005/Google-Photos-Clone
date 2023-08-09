@@ -79,4 +79,9 @@ public class PhotosController {
     public String infoPage(){
         return "info";
     }
+
+    @GetMapping("/errorPage")
+    public String error(){
+        return "errorPage";
+    }
 }
