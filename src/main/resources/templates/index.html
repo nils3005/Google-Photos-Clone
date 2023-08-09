@@ -24,7 +24,7 @@
 
     <div class="container">
             <!--Control Form-->
-            <div class="row d-flex align-items-center justify-content-center p-2">
+            <div class="row d-flex align-items-center justify-content-center p-3">
                 <div class="col col-sm-5 input-group">
                     <div class="input-group-prepend">
                         <button onclick="uploadFile();" type="button" class="btn input-group-text" id="inputGroupFileAddon01" >Hochladen</button>
@@ -39,6 +39,11 @@
                     <button onclick="toggleSelect(this)" class="btn bi bi-toggle-off"></button>
                     <button onclick="deleteSelectedPhotos(this)" id="multipleDelete" class="btn bi bi-trash disabled"></button>
                     <button onclick="downloadSelectedPhotos(this)" id="multipleDownload" class="btn bi bi-download disabled"></button>
+                </div>
+
+                <div class="col">
+                    <button onclick="changeView(this)" id="2cols" class="btn bi bi-grid"></button>
+                    <button onclick="changeView(this)" id="3cols" class="btn bi bi-grid-3x3 disabled"></button>
                 </div>
             </div>
 
