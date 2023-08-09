@@ -112,4 +112,31 @@ function showInputChange(input) {
     }
 }
 
+function changeView(e){
+    switch(e.id){
+        case "3cols":
+            if(!e.classList.contains("disabled")){
+                const divs = document.querySelectorAll("div.col-sm-6");
+                for(let i = 0; i < divs.length; i++){
+                    divs[i].classList.remove("col-sm-6");
+                    divs[i].classList.add("col-sm-4");
+                }
+                e.classList.add("disabled");
+                document.getElementById("2cols").classList.remove("disabled");
+            }
+            break;
+        case "2cols":
+            if(!e.classList.contains("disabled")){
+               const divs = document.querySelectorAll("div.col-sm-4");
+               for(let j = 0; j < divs.length; j++){
+                    divs[j].classList.remove("col-sm-4");
+                    divs[j].classList.add("col-sm-6");
+               }
+               e.classList.add("disabled");
+               document.getElementById("3cols").classList.remove("disabled");
+            }
+            break;
+    }
+}
+
 function reload(){ location.reload(); }
