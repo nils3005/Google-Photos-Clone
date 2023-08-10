@@ -62,4 +62,12 @@ public class Photo {
     public Integer getId() {
         return this.id;
     }
+
+    public String reverseDateOrder(){
+        String result = "";
+        String[] ar = lastmodified.split(".");
+
+
+        return result;
+    }
 }

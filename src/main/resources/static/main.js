@@ -5,7 +5,7 @@ async function uploadFile(){
     const files = fileupload.files;
     for(let i = 0; i < files.length; i++){
         const d = new Date(files[i].lastModified);
-        const date = d.getDate() + "." + (d.getMonth()+1) + "." + d.getFullYear();
+        const date = d.getFullYear() + "-" + (d.getMonth()+1) + "-" + d.getDate();
         console.log(date);
 
         const name = files[i].name;
