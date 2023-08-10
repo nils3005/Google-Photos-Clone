@@ -36,4 +36,9 @@ public class PhotoService {
         photoRepository.save(photo);
         return photo;
     }
+
+    public Photo save(Photo photo){
+        photoRepository.save(photo);
+        return photo;
+    }
 }

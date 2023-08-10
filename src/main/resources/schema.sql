@@ -2,5 +2,6 @@ create table if not exists photos (
     id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
     file_name varchar(255),
     content_type varchar(255),
-    base64 LONGTEXT
+    base64 LONGTEXT,
+    lastmodified varchar(255)
 );
