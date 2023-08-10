@@ -17,6 +17,8 @@ public class Photo {
 
     @NotEmpty
     String base64;
+    @NotEmpty
+    String lastmodified;
 
     public Photo(){
     }
@@ -46,6 +48,18 @@ public class Photo {
     }
 
     public Integer id(){
+        return this.id;
+    }
+
+    public String getLastmodified() {
+        return lastmodified;
+    }
+
+    public void setLastmodified(String lastmodified) {
+        this.lastmodified = lastmodified;
+    }
+
+    public Integer getId() {
         return this.id;
     }
 }

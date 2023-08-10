@@ -1,26 +1,51 @@
 let isSelect = true;
 let photos = [];
 
-async function uploadFile() {
-    let formData = new FormData();
-    for(let i = 0; i < fileupload.files.length; i++){
-        formData.append("data", fileupload.files[i]);
-    }
-    await fetch('http://localhost:8080/post', {
+async function uploadFile(){
+    const files = fileupload.files;
+    for(let i = 0; i < files.length; i++){
+        const d = new Date(files[i].lastModified);
+        const date = d.getDate() + "-" + (d.getMonth()+1) + "-" + d.getFullYear();
+        console.log(date);
+
+        const name = files[i].name;
+        console.log(name);
+
+        const type = files[i].type;
+        console.log(type);
+
+        const base64 = await toBase64(files[i]);
+        console.log(base64);
+
+        fetch("http://localhost:8080/post", {
             method: "POST",
-            body: formData
-            });
+            headers: {
+                "Content-Type":"application/json"
+            },
+            body: JSON.stringify({
+                "fileName" : name,
+                "contentType" : type,
+                "base64" : base64,
+                "lastmodified" : date
+            })
+        });
+    }
     reload();
 }
+
+const toBase64 = file => new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = reject;
+});
 
 async function deleteFile(id){
     await fetch('http://localhost:8080/delete/' + id, { method: "DELETE" });
     reload();
 }
 
-async function downloadFile(id){
-    window.location.href= ("http://localhost:8080/download/" + id);
-}
+async function downloadFile(id){ window.location.href= ("http://localhost:8080/download/" + id); }
 
 function deletePhotoFromModal() {
     const modalImg = document.getElementsByClassName("modal-img");
