@@ -1,20 +1,6 @@
 let isSelect = true;
 let photos = [];
 
-/*
-async function uploadFile(){
-    let formData = new FormData();
-    for(let i = 0; i < fileupload.files.length; i++){
-        formData.append("data", fileupload.files[i]);
-    }
-    await fetch('http://localhost:8080/post', {
-            method: "POST",
-            body: formData
-            });
-    reload();
-}
-*/
-
 async function uploadFile(){
     const files = fileupload.files;
     for(let i = 0; i < files.length; i++){

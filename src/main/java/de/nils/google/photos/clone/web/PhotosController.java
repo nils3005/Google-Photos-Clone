@@ -7,10 +7,8 @@ import org.springframework.http.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 @Controller
@@ -30,27 +28,9 @@ public class PhotosController {
         return "index";
     }
 
-    /*
-    @PostMapping("/post")
-    public String upload(@RequestPart("data") MultipartFile[] files) throws IOException {
-
-
-        for (int i = 0; i < files.length; i++) {
-            if (files[i].getContentType().contains("image/") && !files[i].isEmpty()) {
-                photoService.save(files[i]);
-            }
-        }
-        return "redirect:/";
-    }
-
-     */
     @PostMapping(path = "/post", consumes = "application/json", produces = "application/json")
     //@ResponseBody
     public String post (@RequestBody Photo photo){
-        System.out.println("Filename vom Server: " + photo.getFileName());
-        System.out.println("Filename vom Server: " + photo.getLastmodified());
-        System.out.println("Filename vom Server: " + photo.getContentType());
-        System.out.println("-----------------------------");
         photoService.save(photo);
         return "redirect:/";
     }

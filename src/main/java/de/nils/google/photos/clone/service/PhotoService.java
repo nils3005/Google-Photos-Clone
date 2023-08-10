@@ -28,15 +28,6 @@ public class PhotoService {
         photoRepository.deleteById(id);
     }
 
-    public Photo save(MultipartFile file) throws IOException {
-        Photo photo = new Photo();
-        photo.setFileName(file.getOriginalFilename());
-        photo.setContentType(file.getContentType());
-        photo.setBase64(Base64.getEncoder().encodeToString(file.getBytes()));
-        photoRepository.save(photo);
-        return photo;
-    }
-
     public Photo save(Photo photo){
         photoRepository.save(photo);
         return photo;
