@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 @Controller
 public class PhotosController {
@@ -21,15 +22,11 @@ public class PhotosController {
 
     @GetMapping("/")
     public String getPhotos(Model model) {
-        Iterable<Photo> iterable = photoService.getPhotos();
-        ArrayList<Photo> photos = new ArrayList<>();
-        iterable.forEach(photos::add);
-        model.addAttribute("photos", photos);
+        model.addAttribute("map", photoService.getPhotosOrderedByDate());
         return "index";
     }
 
     @PostMapping(path = "/post", consumes = "application/json", produces = "application/json")
-    //@ResponseBody
     public String post (@RequestBody Photo photo){
         photoService.save(photo);
         return "redirect:/";

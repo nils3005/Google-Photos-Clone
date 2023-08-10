@@ -5,7 +5,7 @@ async function uploadFile(){
     const files = fileupload.files;
     for(let i = 0; i < files.length; i++){
         const d = new Date(files[i].lastModified);
-        const date = d.getDate() + "-" + (d.getMonth()+1) + "-" + d.getFullYear();
+        const date = d.getDate() + "." + (d.getMonth()+1) + "." + d.getFullYear();
         console.log(date);
 
         const name = files[i].name;
@@ -17,7 +17,7 @@ async function uploadFile(){
         const base64 = await toBase64(files[i]);
         console.log(base64);
 
-        fetch("http://localhost:8080/post", {
+        await fetch("http://localhost:8080/post", {
             method: "POST",
             headers: {
                 "Content-Type":"application/json"
