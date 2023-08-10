@@ -1,10 +1,14 @@
 <div th:fragment="photos">
   <!--Fotos-->
-  <div class="row mt-3 pt-3 mb-5 pb-5" id="photo-row">
-    <div class="col-sm-4" th:each="foto : ${photos}">
+  <div th:each="element : ${map}" class="row mt-3 pt-3 mb-5 pb-5" id="photo-row">
+
+    <div class="d-flex w-100">
+    <h3 th:text="${element.key}">Datum</h3>
+    </div>
+
+    <div th:each="foto : ${element.value}" class="col-sm-4">
       <div class="form-check mt-4 mb-4 d-flex justify-content-center shadow p-1 bg-white rounded">
         <img th:src="${foto.getBase64()}" th:id="${foto.id}" class="photo img-fluid" alt="Foto" loading="lazy">
-        <span th:text="${foto.getLastmodified()}"></span>
       </div>
     </div>
   </div>
@@ -12,7 +16,7 @@
   <!--Statusanzeige-->
   <div class="row text-center">
     <div class="col">
-      <span th:text="${photos?.isEmpty} ? 'Hier ist der Platz für deine Fotos!' : ''" class="text-secondary"></span>
+      <span th:text="${map?.isEmpty} ? 'Hier ist der Platz für deine Fotos!' : ''" class="text-secondary"></span>
     </div>
   </div>
 </div>
